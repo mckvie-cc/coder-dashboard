@@ -1,2 +1,2 @@
-# -coder-dashboard
+# coder-dashboard
 Homepage for the coding chapter
