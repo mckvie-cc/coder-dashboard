@@ -1,0 +1,27 @@
+{
+  "name": "coder-dashboard",
+  "version": "1.0.0",
+  "description": "Homepage for the coding chapter",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raj2310/coder-dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raj2310/coder-dashboard/issues"
+  },
+  "homepage": "https://github.com/Raj2310/coder-dashboard#readme",
+  "dependencies": {
+    "csv-parser": "^1.11.0",
+    "express": "^4.15.2",
+    "mongodb": "^2.2.24",
+    "nodemailer": "^3.1.4",
+    "nodemon": "^1.11.0"
+  }
+}
