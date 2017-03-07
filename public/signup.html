@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Coder- Dashboard</title>
+  <meta name="description" content="Coder Dashboardard Signup">
+  <meta name="author" content="raj Vaibhav Singh">
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <script src="js/vue.js"></script>
+  
+  <form method="post" action="/register">
+    <input type="email" name="email" disabled="disabled">
+    <input type="hidden" name="authKey">
+    <input type="password" name="password" required>
+    <input type="password" name="confirmPassword" required>
+    <select required>
+      <option value="none" disabled selected>Choose</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <input type="url" name="githubUrl" required>
+    <input type="submit">
+  </form>
+  <script src="js/signup.js"></script>
+</body>
+</html>
