@@ -24,6 +24,9 @@ exports.varifyEmail=function(req,res){
             else if(items.length===0){
                 res.send({status:2});
             }
+            else if(items[0].registered===true){
+                res.send({status:3});
+            }
             else{
               res.send({status:1,user:items[0]});
             }
@@ -52,9 +55,9 @@ exports.addRegistered=function(req,res){
   });
 }
 exports.register=function(req,res){
-  /*var email=req.body.email;
-  var authKey=req.body.authKey;*/
- /* MongoClient.connect(database_url,function(err, db) {
+  var email=req.body.email;
+  var authKey=req.body.authKey;
+  MongoClient.connect(database_url,function(err, db) {
      console.log("Connected successfully to server");
      db.collection('signups_temp', function(err, collection) {
         if(err){
@@ -67,18 +70,76 @@ exports.register=function(req,res){
                res.send({status:0});
             }
             else if(items.length===0){
-                res.send({status:2});
+                res.send("no Maching email and password found");
             }
             else{
-              res.send({status:1,user:items[0]});
+              if(items[0].registered===false){
+                //make registered key true for email, authKey
+                //add a new user to database with response.body object
+                newUserInsert(email, authKey,req.body);
+                res.send("Good job");
+              }
+              else{
+                res.send("Already Registered");
+              }
+              
             }
           }); 
         }
       });
     //console.log(req.params);
       db.close();
-  });*/
+  });
   console.log(req.body);
-  res.send("hhhh");
+}
 
+exports.getUsers=function(req,res){
+   MongoClient.connect(database_url,function(err, db) {
+     console.log("Connected successfully to server");
+     db.collection('users', function(err, collection) {
+        if(err){
+          res.send({status:0});
+          console.log(err);
+        }
+        else{
+          collection.find({}).toArray(function(err, items) {
+            res.send(items);
+          }); 
+        }
+      });
+      db.close();
+  });
+}
+
+function makeRegisteredKeyTrue(email, authKey,userInfo, callback) {
+    MongoClient.connect(database_url,function(err, db) {
+     console.log("Connected successfully to server");
+     db.collection('signups_temp', function(err, collection) {
+        if(err){
+          console.log(err);
+        }
+        else{
+          collection.update({email:email},{$set:{registered:true}});
+        }
+      });
+      db.close();
+  });
+    callback(userInfo);
+}
+function newUserInsert(email, authKey,userInfo){
+  makeRegisteredKeyTrue(email, authKey,userInfo, function(userData) {
+      MongoClient.connect(database_url,function(err, db) {
+       console.log("Connected successfully to server");
+       db.collection('users', function(err, collection) {
+          if(err){
+            console.log(err);
+          }
+          else{
+            collection.insert({name:userData.name,email:userData.email,password:userData.password,sex:userData.sex,
+              profile_url:userData.github_profile});
+          }
+        });
+        db.close();
+    });
+  });
 }
