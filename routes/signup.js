@@ -1,7 +1,7 @@
 var mongo = require('mongodb');
-var Server = mongo.Server,
-    Db = mongo.Db,
-    BSON = mongo.BSONPure;
+var Server = mongo.Server
+var Db = mongo.Db
+var BSON = mongo.BSONPure;
 var objectId=mongo.ObjectId;
 var MongoClient = mongo.MongoClient;
 var database_url="mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard";
@@ -11,6 +11,9 @@ exports.varifyEmail=function(req,res){
   var email=req.params.email;
   var authKey=req.params.authKey;
    MongoClient.connect(database_url,function(err, db) {
+    if(err){
+      throw new Error('Could not connect to DB')
+    }
      console.log("Connected successfully to server");
      db.collection('signups_temp', function(err, collection) {
         if(err){

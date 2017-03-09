@@ -1,13 +1,14 @@
 var csv = require('csv-parser')
 var fs = require('fs');
 var mongo = require('mongodb');
-var Server = mongo.Server,
-    Db = mongo.Db,
-    BSON = mongo.BSONPure;
+var Server = mongo.Server
+var Db = mongo.Db
+var BSON = mongo.BSONPure;
 var objectId=mongo.ObjectId;
 var MongoClient = mongo.MongoClient;
 var database_url="mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard";
- exports.AddInitialUsers=function(req,res){ 
+
+exports.AddInitialUsers=function(req,res){ 
  fs.createReadStream('Initial_Assessment_Quiz.csv')
   .pipe(csv())
   .on('data', function (data) {
