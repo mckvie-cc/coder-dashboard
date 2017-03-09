@@ -176,7 +176,7 @@ function mailer(email,authKey){
             pass: 'joysa000' // Your password
         }
     });
-  var registration_link='http://signup.html?email='+email+'&authKey='+authKey;
+  var registration_link='http://localhost:3000/signup.html?email='+email+'&authKey='+authKey;
   var text = '<h3>Hello coders</h3>'+
   '<em>Congratulations</em> for taking first step toward your coding careers'+
   '“<p><em>To embark on the journey towards your goals and dreams requires bravery. To remain on that path requires courage. The bridge that merges the two is commitment.</em></p>”'+
