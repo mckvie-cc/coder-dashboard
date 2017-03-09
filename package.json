@@ -22,7 +22,7 @@
     "csv-parser": "^1.11.0",
     "express": "^4.15.2",
     "mongodb": "^2.2.24",
-    "nodemailer": "^3.1.4",
+    "nodemailer": "^3.1.5",
     "nodemon": "^1.11.0"
   }
 }

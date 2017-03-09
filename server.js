@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.get('/varifyEmail/:email/:authKey',signup.varifyEmail);
 app.get('/getUsers',signup.getUsers);
 app.post('/register',signup.register);
+app.get('/sendMails',signup.sendMails);
 /*app.get('/AddInitialUsers',csv.AddInitialUsers);*/
 /*app.get('/addRegistered',signup.addRegistered);*/
 app.get('/', function(req, res){

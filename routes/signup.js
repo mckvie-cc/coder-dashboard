@@ -5,6 +5,7 @@ var Server = mongo.Server,
 var objectId=mongo.ObjectId;
 var MongoClient = mongo.MongoClient;
 var database_url="mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard";
+var nodemailer = require('nodemailer');
 
 exports.varifyEmail=function(req,res){ 
   var email=req.params.email;
@@ -111,6 +112,28 @@ exports.getUsers=function(req,res){
   });
 }
 
+exports.sendMails=function(req,res){
+  MongoClient.connect(database_url,function(err, db) {
+     console.log("Connected successfully to server");
+     db.collection('signups_temp', function(err, collection) {
+        if(err){
+          res.send({status:0});
+          console.log(err);
+        }
+        else{
+          collection.find({}).toArray(function(err, items) {
+            items.forEach(function(item){
+                mailer(item.email,item.authKey);
+            });
+          }); 
+        }
+      });
+      db.close();
+  });
+}
+
+
+
 function makeRegisteredKeyTrue(email, authKey,userInfo, callback) {
     MongoClient.connect(database_url,function(err, db) {
      console.log("Connected successfully to server");
@@ -141,5 +164,36 @@ function newUserInsert(email, authKey,userInfo){
         });
         db.close();
     });
+  });
+}
+
+
+function mailer(email,authKey){
+  var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: '50daysofcode@gmail.com', // Your email id
+            pass: 'joysa000' // Your password
+        }
+    });
+  var registration_link='http://signup.html?email='+email+'&authKey='+authKey;
+  var text = '<h3>Hello coders</h3>'+
+  '<em>Congratulations</em> for taking first step toward your coding careers'+
+  '“<p><em>To embark on the journey towards your goals and dreams requires bravery. To remain on that path requires courage. The bridge that merges the two is commitment.</em></p>”'+
+    '<p>Use the following link to register for 50 Days Of Code : <a href="'+registration_link+'">Registration Link</a></p>';
+  var mailOptions = {
+    from: '50daysofcode@gmail.com', // sender address
+    to: email, // list of receivers
+    subject: 'Registration for 50 Days Of Code', // Subject line
+    html: text //, // plaintext body
+    // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        console.log(error);
+        
+    }else{
+        console.log('Message sent: ' + info.response);
+    };
   });
 }
