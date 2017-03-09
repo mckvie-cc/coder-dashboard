@@ -10,22 +10,23 @@
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
 </head>
 
 <body>
-  <script src="js/vue.js"></script>
   
   <form method="post" action="/register">
-    <input type="email" name="email" disabled="disabled">
-    <input type="hidden" name="authKey">
-    <input type="password" name="password" required>
-    <input type="password" name="confirmPassword" required>
-    <select required>
+    <input type="hidden" name="email"  id="email">
+    <input type="hidden" name="authKey" id="authKey">
+    <input type="text" name="name"  id="name" placeholder="Your Name">
+    <input type="password" name="password" required placeholder="password">
+    <input type="password" name="confirmPassword" required placeholder="Confirm Password">
+    <select required name="sex" >
       <option value="none" disabled selected>Choose</option>
       <option value="male">Male</option>
       <option value="female">Female</option>
     </select>
-    <input type="url" name="githubUrl" required>
+    <input type="url"  placeholder="https://github.com/Raj2310" name="github_profile" required>
     <input type="submit">
   </form>
   <script src="js/signup.js"></script>
