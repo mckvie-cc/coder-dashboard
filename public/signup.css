@@ -1,0 +1,68 @@
+body{
+	margin: 0;
+	font-size: 16px;
+	font-family: Helvetica, sans-serif;
+	background: -webkit-linear-gradient(left bottom,#a333b5,#c85ed8);
+}
+
+a{
+	text-decoration: none;
+	color: #333444;
+}
+
+h3{
+	text-align: center;
+	color: #fff;
+
+}
+
+.reg-form{
+	position: absolute;
+	top: 50px;
+	left: 50%;
+	padding: 20px;
+	margin-left: -200px;
+	width: 360px;
+	border-radius: 3px;
+	background: #EEEFFF;
+	box-shadow: 0 0 0 3px #a333b5;
+}
+
+@media screen and (max-width: 360px){
+	.reg-form{
+		margin-left: -160px;
+		width: 280px;		
+	}
+}
+
+input{
+	position: relative;
+	float: right;
+}
+
+#name,#roll,#password,#confirmPassword,#github_profile{
+	margin-right: 5px;
+	margin-bottom: 10px;
+	padding: 4px;
+	outline: none;
+	border: 1px solid #777888;
+	width: calc(100% - 20px);
+	height: 24px;
+}
+
+#sex{
+	height: 24px;
+	margin-left: 5px;
+	margin-bottom: 10px;
+}
+
+#submit{
+	margin-right: 5px;
+	width: 100px;
+	height: 36px;
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	background: -webkit-linear-gradient(left bottom,#a333b5,#c85ed8);
+	color: #fff;
+}

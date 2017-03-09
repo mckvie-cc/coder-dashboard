@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Coder- Dashboard</title>
+  <meta name="description" content="Coder Dashboardard Signup">
+  <meta name="author" content="Sayantan Ghosh">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="signup.css">
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+</head>
+
+<body>
+  <h3>Register for 50 days of code</h3>
+  <form class = "reg-form" method="post" action="/register">
+    <input type="hidden" name="email"  id="email">
+    <input type="hidden" name="authKey" id="authKey">
+    <input type="text" name="name"  id="name" placeholder="Your Name">
+    <input type="text" name="roll"  id="roll" placeholder="College Roll Number">
+    <input type="password" id = "password" name="password" required placeholder="password">
+    <input type="password" id = "confirmPassword" name="confirmPassword" required placeholder="Confirm Password">
+    <select required name="sex" id = "sex">
+      <option value="none" disabled selected>Choose</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <input type="url"  placeholder="https://github.com/itsSayantan" id = "github_profile" name="github_profile" required>
+    <input type="submit" id = "submit" value = "Register">
+  </form>
+  <script src="js/signup.js"></script>
+</body>
+</html>
