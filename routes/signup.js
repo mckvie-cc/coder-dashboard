@@ -86,7 +86,6 @@ exports.register=function(req,res){
               else{
                 res.send("Already Registered");
               }
-              
             }
           }); 
         }
