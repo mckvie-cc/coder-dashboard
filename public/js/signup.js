@@ -7,12 +7,11 @@
 			//console.log("hummer");
 			//window.location.href='/';
 		}else{
-			fetch('/varifyEmail/'+email+'/'+authKey, {
+			fetch('users/varifyEmail/'+email+'/'+authKey, {
 			method: 'get'
 			}).then(x => x.json())
 			.then(function(returnedValue) {
 				if (returnedValue.status!=1) {
-					//console.log(returnedValue);
 					window.location.href='/';
 				}
 				else{

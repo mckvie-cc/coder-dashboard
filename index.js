@@ -19,8 +19,10 @@ app.use(bodyParser.urlencoded({
 
 const routes = require('./routes/web_pages')
 const users = require('./routes/accounts')
+const api=require('./routes/apis')
 app.use('/', routes)
 app.use('/users', users)
+app.use('/api',api)
 
 // app.get('/varifyEmail/:email/:authKey',signup.varifyEmail);
 // app.get('/getUsers',signup.getUsers);

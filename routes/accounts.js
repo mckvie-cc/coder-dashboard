@@ -1,6 +1,10 @@
 var express = require('express')
 var router = express.Router()
-
+var mongo = require('mongodb');
+var objectId=mongo.ObjectId;
+var MongoClient = mongo.MongoClient;
+var nodemailer = require('nodemailer');
+var database_url="mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard";
 router.get('/getUsers', (req, res) => {
    MongoClient.connect(database_url,function(err, db) {
      console.log("Connected successfully to server");
@@ -19,7 +23,7 @@ router.get('/getUsers', (req, res) => {
   });
 })
 
-router.get('/register', (req, res) => {
+router.post('/register', (req, res) => {
     var email = req.body.email;
     var authKey = req.body.authKey;
     MongoClient.connect(database_url, function(err, db) {
