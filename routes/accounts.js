@@ -163,8 +163,7 @@ function mailer(email,authKey){
   };
   transporter.sendMail(mailOptions, function(error, info){
     if(error){
-        console.log(error);
-        
+        throw new Error(error);
     }else{
         console.log('Message sent: ' + info.response);
     };
