@@ -1,6 +1,6 @@
 (function() {
 	function getUsers(){
-		fetch('/getUsers', {
+		fetch('/users/getUsers', {
 			method: 'get'
 		}).then(x => x.json())
 		.then(function(returnedValue) {

@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const signup = require('./routes/signup')
-const csv = require('./routes/csv')
 const app = express();
 const bodyParser = require('body-parser')
 const port = 3000
@@ -30,7 +29,7 @@ const routes = require('./routes/web_pages')
 const users = require('./routes/accounts')
 const api = require('./routes/apis')
 
-//This middleware enable the db variable to be used in all routes
+//This middleware enables the db variable to be used in all routes
 app.use(function(req, res, next) {
     req.db = DBObj;
     next();
@@ -38,10 +37,3 @@ app.use(function(req, res, next) {
 app.use('/', routes)
 app.use('/users', users)
 app.use('/api', api)
-
-// app.get('/varifyEmail/:email/:authKey',signup.varifyEmail);
-// app.get('/getUsers',signup.getUsers);
-// app.post('/register',signup.register);
-// app.get('/sendMails',signup.sendMails);
-/*app.get('/AddInitialUsers',csv.AddInitialUsers);*/
-/*app.get('/addRegistered',signup.addRegistered);*/
