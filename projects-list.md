@@ -18,7 +18,12 @@
 ## Mini Browser Games
 
 - Saap Seedhi
-- Tic-tac-toe
 - Simon Game
 - Arithmatic puzzle
 - Catch the candy
+- Whack the mole
+- Chhua chhui
+- bouncing ball
+- Boe and arrow
+- Helicopter crash
+- Packman
