@@ -1,5 +1,5 @@
 # coder-dashboard
-Homepage for the coding chapter
+Homepage for the MCKVIE coding chapter
 
 mlab username : rankitAlgo
 
