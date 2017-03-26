@@ -8,7 +8,7 @@
 <body>
 <div>
 
-  <div class="ui fixed large inverted menu">
+  <div class="ui large inverted menu">
     <div class="ui container">
       <a href="#" class="header item">
         <!-- <img class="logo" src="/images/logo.png"> -->
@@ -22,12 +22,10 @@
     </div>
   </div>
   <div class="ui main text container">
-    <h1 class="ui header">Semantic UI Fixed Template</h1>
     <h1>Welcome to the dashboard of MCKVCC</h1>
 
     <div class="list">
-	<ul>
-	</ul>
+		<div class="ui active centered inline loader"></div>
 	</div>
   </div>
 
@@ -36,10 +34,12 @@
 		$(document).ready(function(){
 			$.get('/apis/user_commits', function(data){
 				console.log(data)
+				let listHtml = '<ul>'
 				data.forEach(function(el){
-					let htmlStr = `<li><a href="">${el.name}</a><span>(${el.team_name})</span> <strong>${el.commit_count}</strong></li>`
-					$('.list ul').append(htmlStr)
+					listHtml += `<li><a href="">${el.name}</a><span>(${el.team_name})</span> <strong>${el.commit_count}</strong></li>`
 				})
+				listHtml += '</ul>'
+				$('.list').html(listHtml)
 			})
 		});
 	</script>
