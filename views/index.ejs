@@ -2,14 +2,47 @@
 <html>
 <head>
 	<title><%= title %></title>
+	<%- include('./includes/meta-includes'); %>
+	<%- include('./includes/css-includes'); %>
 </head>
 <body>
 <div>
+
+  <div class="ui fixed large inverted menu">
+    <div class="ui container">
+      <a href="#" class="header item">
+        <!-- <img class="logo" src="/images/logo.png"> -->
+        MCKVCC
+      </a>
+      <a href="/" class="item">Home</a>
+      <div class="right menu">
+      	<a class="item" href="/signup">Sign Up</a>
+	    </a>
+	  </div>
+    </div>
+  </div>
+  <div class="ui main text container">
+    <h1 class="ui header">Semantic UI Fixed Template</h1>
+    <h1>Welcome to the dashboard of MCKVCC</h1>
+
+    <div class="list">
 	<ul>
-		<li>User 1</li>
-		<li>User 2</li>
-		<li>User 3</li>
 	</ul>
+	</div>
+  </div>
+
+	<%- include('./includes/js-includes'); %>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.get('/apis/user_commits', function(data){
+				console.log(data)
+				data.forEach(function(el){
+					let htmlStr = `<li><a href="">${el.name}</a><span>(${el.team_name})</span> <strong>${el.commit_count}</strong></li>`
+					$('.list ul').append(htmlStr)
+				})
+			})
+		});
+	</script>
 </div>
 </body>
 </html>

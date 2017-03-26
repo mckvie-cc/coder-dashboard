@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 
 const web_pages = require('./routes/web_pages')
 const users = require('./routes/accounts')
-const api = require('./routes/apis')
+const apis = require('./routes/apis')
 
 //This middleware enables the db variable to be used in all routes
 app.use(function(req, res, next) {
@@ -36,4 +36,4 @@ app.use(function(req, res, next) {
 });
 app.use('/', web_pages)
 app.use('/users', users)
-app.use('/api', api)
+app.use('/apis', apis)
