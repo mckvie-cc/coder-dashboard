@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const app = express();
 const bodyParser = require('body-parser')
-const port = 3000
+const port = process.env.PORT || 3000
 const MongoClient = require('mongodb').MongoClient
 const dbURL = "mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard"
 var DBObj
