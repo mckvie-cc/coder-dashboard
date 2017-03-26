@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const signup = require('./routes/signup')
 const app = express();
 const bodyParser = require('body-parser')
 const port = 3000
@@ -9,7 +8,8 @@ const dbURL = "mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard"
 var DBObj
 MongoClient.connect(dbURL, (err, db) => {
     if (err) {
-    	console.log('DB could not be connected')
+    	console.log('DB could not be connected\n',err.message)
+        return
     }
     DBObj = db
     app.listen(port, function() {
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-const routes = require('./routes/web_pages')
+const web_pages = require('./routes/web_pages')
 const users = require('./routes/accounts')
 const api = require('./routes/apis')
 
@@ -34,6 +34,6 @@ app.use(function(req, res, next) {
     req.db = DBObj;
     next();
 });
-app.use('/', routes)
+app.use('/', web_pages)
 app.use('/users', users)
 app.use('/api', api)

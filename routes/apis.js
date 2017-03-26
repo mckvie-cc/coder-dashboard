@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const request = require('request')
-const json_data = require('../commit_data.json')
+const json_data = require('../public/commit_data.json')
 
 router.get('/user_commits', (req, res) => {
     const db = req.db
