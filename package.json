@@ -27,7 +27,6 @@
     "mongodb": "^2.2.24",
     "nodemailer": "^3.1.5",
     "nodemon": "^1.11.0",
-    "request": "^2.81.0",
-    "semantic-ui": "^2.2.9"
+    "request": "^2.81.0"
   }
 }
