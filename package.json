@@ -1,6 +1,9 @@
 {
   "name": "coder-dashboard",
   "version": "1.0.0",
+  "engines": {
+    "node": "7.0.0"
+  },
   "description": "Homepage for the coding chapter",
   "scripts": {
     "start": "node app.js",
