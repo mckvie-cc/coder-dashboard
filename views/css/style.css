@@ -1,0 +1,194 @@
+body{
+	margin: 0;
+	font-size: 16px;
+	font-family: Helvetica, sans-serif;
+}
+
+ul{
+	list-style: none;
+}
+
+.banner{
+	text-align: center;
+	color: #fff;
+	font-size: 4em;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	background: -webkit-linear-gradient(top left,#B904C5,rgb(17, 43, 126));
+	box-shadow: 0 0 0 3px #dddeee;
+	margin-bottom: 20px;
+	z-index: 1;
+}
+
+.list{
+	position: absolute;
+	top: 230px;
+	left: 50%;
+	margin-left: -200px;
+	margin-bottom: 10px;
+	width: 400px;
+	box-shadow: 0 0 0 1px #dddeee;
+	z-index: 0;
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+li{
+	position: relative;
+	float: left;
+	margin: 10px 10px 10px 10px;
+	width: calc(100% - 20px);
+	box-shadow: 0 0 0 1px #dddeee;
+}
+
+li *{
+	text-align: center;
+	position: relative;
+	float: left;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
+li a{
+	font-size: 18px;
+}
+
+li span{
+	font-size: 14px;
+	color: #555666;
+}
+
+li strong{
+	font-family: helvetica;
+}
+
+@media screen and (max-width: 1280px){
+	.banner{
+		font-size: 3em;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+
+	.list{
+		top: 150px;
+	}
+}
+
+@media screen and (max-width: 640px){
+	.banner{
+		font-size: 2em;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+
+	.list{
+		top: 150px;
+		left: 20px;
+		margin-left: 0;
+		width: calc(100% - 40px);
+	}
+}
+
+@media screen and (max-width: 360px){
+	.banner{
+		font-size: 1.4em;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+
+	.list{
+		top: 100px;
+		left: 10px;
+		margin-left: 0;
+		width: calc(100% - 20px);
+	}
+}
+
+/*  ----------------------- PROFILE PAGE ------------------------   */
+
+.menu{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 46px;
+	background: -webkit-linear-gradient(top left,#B904C5,rgb(17, 43, 126));
+	box-shadow: 0 0 0 1px #DDDEEE;
+}
+
+.header-item{
+	text-align: center;
+	text-decoration: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 16px;
+	height: 16px;
+	width: 100px;
+	padding: 15px;
+	color: #fff;
+}
+
+.homeb{
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -70px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	height: 16px;
+	width: 80px;
+	padding: 15px;
+	color: #fff;
+}
+
+.signupb{
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	height: 16px;
+	width: 80px;
+	padding: 15px;
+	color: #fff;
+}
+
+.user-details{
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: -200px;
+	width: 400px;
+	box-shadow: 0 0 0 1px #DDDEEE;
+}
+
+.user-details *{
+	text-align: center;
+	position: relative;
+	float: left;
+	width: 100%;
+}
+
+.user-details h3{
+	font-size: 20px;
+}
+
+.user-details h5{
+	color: #888999;
+}
+
+.user-details a{
+	text-decoration: none;
+}
