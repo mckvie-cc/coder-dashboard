@@ -2,13 +2,71 @@
 <html>
 <head>
 	<title><%= title %></title>
+	<%- include('./includes/meta-includes'); %>
+	<%- include('./includes/css-includes'); %>
+	<style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
 </head>
 <body>
-	<form>
-		<input type="email" name="email" required="true">
-		<input type="password" name="password" required="true">
+	<div>
+			<%- include('./includes/header-includes'); %>
+	</div>
+
+	<br>
+	<!-- <form>
+		Email:<input type="email" name="email" required="true">
+		Password:<input type="password" name="password" required="true">
 		<input type="submit" name="submit" id="submit">
-	</form>
+	</form> -->
+	<body>
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <form class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <button class="ui fluid large teal submit button" type="submit">Login</button>
+      </div>
+
+      <div class="ui error message"></div>
+
+    </form>
+
+    <div class="ui message">
+      New to us? <a href="/signup">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+</body>
 	<%- include('./includes/js-includes'); %>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -19,6 +77,7 @@
 		            'email': $('input[name=email]').val(),
 		            'password': $('input[name=password]').val(),
 		        };
+		        console.log(formData)
 		        //make ajax post to server
                 $.ajax({
                 	type: 'POST',
@@ -26,11 +85,10 @@
                 	data: formData,
                 	dataType: 'json',
                 	success: function(result){
-                		window.location.href('/')
+                		window.location.href('localhost:3000/signup')
                 	},
                 	error: function(error){
                 		console.log(error)
-                		window.location.reload()
                 	}
                 })
 			})
