@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const request = require('request')
+const sendMail = require('../utils/mailer')
 const json_data = require('../public/commit_data.json')
 
 router.get('/user_commits', (req, res) => {
@@ -59,7 +60,7 @@ router.get('/user', (req, res) => {
             if (err) {
                 return res.status(500).send('Users list could not be retrieved');
             }
-            
+
             let usersList = user_list.map((user) => {
                 let userObj = {
                     id: user._id,
@@ -125,6 +126,11 @@ router.post('/register', (req, res) => {
                     return res.status(500).send('Unexpected Error')
                 } else if (items.length === 0) {
                     collection.insert(newUserInfo)
+                    sendMail({
+                      to: newUserInfo.email,
+                      subject: 'Welcome to 50 Days of Code',
+                      body: '<h3>50 Days of Code</h3><p>Thanks for registering with MCKVCC. <br> #codeOn</p>'
+                    })
                     return res.status(200).send("New user registered");
                 } else {
                     return res.status(403).send("Already Registered");

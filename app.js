@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const app = express();
 const bodyParser = require('body-parser')
+const morgan = require('morgan');
 const config = require('./config/config')
 const port = process.env.PORT || 3000
 const mongo = require('mongodb');
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(morgan('dev'));
 
 const web_pages = require('./routes/web_pages')
 const users = require('./routes/accounts')
