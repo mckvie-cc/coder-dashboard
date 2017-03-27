@@ -2,10 +2,30 @@
 <html>
 <head>
 	<title><%= title %></title>
+	<%- include('./includes/meta-includes'); %>
+	<%- include('./includes/css-includes'); %>
 </head>
 <body>
-<div>
-	User Info here
-</div>
+<%- include('./includes/header-includes'); %>
+
+	<div class="ui main text container">
+		<div class="user-details">
+<!-- 			<h3>Name</h3>
+			<h5>Team Name</h5>
+			<h6><a href="#">Github URL</a></h6> -->
+		</div>
+	</div>
+
+	<%- include('./includes/js-includes'); %>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			const uri = window.location.pathname.replace('/profile', '/apis/user')
+			$.get(uri, function(data){
+				const html = `<h3>${data.name}</h3><h5>${data.team_name}</h5><h6>
+				<a href="${data.profile_url}">Github URL</a></h6>`
+				$('.user-details').html(html)
+			})
+		});
+	</script>
 </body>
 </html>

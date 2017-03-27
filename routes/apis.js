@@ -31,6 +31,7 @@ router.get('/user_commits', (req, res) => {
                     })).length;
 
                     let userObj = {
+                        id: user._id,
                         name: user.name,
                         profile_url: user.profile_url,
                         team_name: user.team_name,
@@ -72,22 +73,27 @@ router.get('/user', (req, res) => {
 
 router.get('/user/:userId', (req, res) => {
     const db = req.db
+    const ObjectId = req.objectId
+
     const userId = req.params.userId
     db.collection('users', function(err, collection) {
         if (err) {
-            return res.status(404).send('Unexpected error')
+            return res.status(500).send('Unexpected error')
         }
-        collection.find({ _id: safeObjectId(userId) }).toArray(function(err, result) {
+        collection.find({ _id: ObjectId(userId).valueOf()}).toArray(function(err, result) {
             if (err) {
-                return res.status(500).json({
-                    error: true,
-                    message: 'Users list could not be retrieved'
-                });
+                return res.status(500).send('Users list could not be retrieved');
             } else {
-                res.status(200).json({
-                    error: false,
-                    data: result
-                });
+                const user = result[0]
+                const userObject = {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    profile_url: user.profile_url,
+                    sex: user.sex,
+                    team_name: user.team_name
+                }
+                return res.status(200).json(userObject);
             }
         });
     });

@@ -10,7 +10,8 @@ router.get('/signup', (req, res)=>{
 router.get('/login', (req, res)=>{
 	res.render('login', {title: 'Coder-Dashboard | Login'})
 })
-router.get('/profile', (req, res)=>{
-	res.render('profile', {title: 'Coder-Dashboard | Profile'})
+router.get('/profile/:userId', (req, res)=>{
+	const userId = req.params.userId
+	res.render('profile', {title: 'Coder-Dashboard | Profile', userId: userId})
 })
 module.exports = router

@@ -7,25 +7,19 @@
 </head>
 <body>
 <div>
-
-  <div class="ui large inverted menu">
-    <div class="ui container">
-      <a href="#" class="header item">
-        <!-- <img class="logo" src="/images/logo.png"> -->
-        MCKVCC
-      </a>
-      <a href="/" class="item">Home</a>
-      <div class="right menu">
-      	<a class="item" href="/signup">Sign Up</a>
-	    </a>
-	  </div>
-    </div>
-  </div>
+<%- include('./includes/header-includes'); %>
   <div class="ui main text container">
     <h1>Welcome to MCKVCC</h1>
 
     <div class="list">
 		<div class="ui active centered inline loader"></div>
+<!-- 		<ul>
+			<li>
+				<a href="">Name of User</a>
+				<span>( Team Name )</span>
+				<strong>Commits Count</strong>
+			</li>
+		</ul> -->
 	</div>
   </div>
 
@@ -33,10 +27,9 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$.get('/apis/user_commits', function(data){
-				console.log(data)
 				let listHtml = '<ul>'
 				data.forEach(function(el){
-					listHtml += `<li><a href="">${el.name}</a><span>(${el.team_name})</span> <strong>${el.commit_count}</strong></li>`
+					listHtml += `<li><a href="/profile/${el.id}">${el.name}</a><span>(${el.team_name})</span> <strong>${el.commit_count}</strong></li>`
 				})
 				listHtml += '</ul>'
 				$('.list').html(listHtml)

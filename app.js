@@ -3,7 +3,9 @@ const path = require('path')
 const app = express();
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
-const MongoClient = require('mongodb').MongoClient
+const mongo = require('mongodb');
+const objectId=mongo.ObjectId;
+const MongoClient = mongo.MongoClient;
 const dbURL = "mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard"
 var DBObj
 MongoClient.connect(dbURL, (err, db) => {
@@ -31,6 +33,7 @@ const apis = require('./routes/apis')
 
 //This middleware enables the db variable to be used in all routes
 app.use(function(req, res, next) {
+    req.objectId = objectId
     req.db = DBObj;
     next();
 });
