@@ -5,11 +5,36 @@
 </head>
 <body>
 	<form>
-		<input type="text" name="email">
-		<input type="password" name="password">
-		<input type="submit" name="submit">
-
-		<a href="/auth/github">Login with GitHub</a>
+		<input type="email" name="email" required="true">
+		<input type="password" name="password" required="true">
+		<input type="submit" name="submit" id="submit">
 	</form>
+	<%- include('./includes/js-includes'); %>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//handle form submission
+			$('form').submit(function(e){
+				e.preventDefault();
+		        var formData = {
+		            'email': $('input[name=email]').val(),
+		            'password': $('input[name=password]').val(),
+		        };
+		        //make ajax post to server
+                $.ajax({
+                	type: 'POST',
+                	url: '/apis/login',
+                	data: formData,
+                	dataType: 'json',
+                	success: function(result){
+                		window.location.href('/')
+                	},
+                	error: function(error){
+                		console.log(error)
+                		window.location.reload()
+                	}
+                })
+			})
+		})
+	</script>
 </body>
 </html>

@@ -53,20 +53,23 @@ router.get('/user', (req, res) => {
     const db = req.db
     db.collection('users', function(err, collection) {
         if (err) {
-            return res.json({
-                error: true,
-                message: 'Unexpected Error'
-            })
+            return res.status(500).json('Unexpected Error')
         }
         collection.find({}).toArray(function(err, user_list) {
             if (err) {
-                return res.status(500).json({
-                    error: true,
-                    message: 'Users list could not be retrieved'
-                });
-            } else {
-                return res.status(200).send(user_list);
+                return res.status(500).send('Users list could not be retrieved');
             }
+            let usersList = user_list.map((user) => {
+                let userObj = {
+                    id: user._id,
+                    name: user.name,
+                    profile_url: user.profile_url,
+                    team_name: user.team_name,
+                    commit_count: commit_count
+                }
+                return userObj
+            })
+            return res.status(200).send(usersList);
         });
     });
 })
@@ -80,7 +83,7 @@ router.get('/user/:userId', (req, res) => {
         if (err) {
             return res.status(500).send('Unexpected error')
         }
-        collection.find({ _id: ObjectId(userId).valueOf()}).toArray(function(err, result) {
+        collection.find({ _id: ObjectId(userId).valueOf() }).toArray(function(err, result) {
             if (err) {
                 return res.status(500).send('Users list could not be retrieved');
             } else {
@@ -120,23 +123,23 @@ router.post('/register', (req, res) => {
     })
 })
 
-router.post('/login', (req, res)=>{
+router.post('/login', (req, res) => {
     const db = req.db
     const email = req.body.email
     const password = req.body.password
 
-    db.collection('users', (err, collection)=>{
-        if(err){
+    db.collection('users', (err, collection) => {
+        if (err) {
             return res.status(500).send('Unexpected error')
         }
-        collection.find({email: email}).toArray(function(err, items){
-            if(err){
+        collection.find({ email: email }).toArray(function(err, items) {
+            if (err) {
                 return res.status(500).send('Unexpected Error')
             }
-            if(items.length === 0){
+            if (items.length === 0) {
                 return res.status(403).send('User not registered')
             } else {
-                if(password === items[0].password){
+                if (password === items[0].password) {
                     return res.status(200).send('Passwords match')
                 }
                 return res.status(500).send('Passwords don\'nt match')
