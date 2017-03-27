@@ -2,11 +2,12 @@ const express = require('express')
 const path = require('path')
 const app = express();
 const bodyParser = require('body-parser')
+const config = require('./config/config')
 const port = process.env.PORT || 3000
 const mongo = require('mongodb');
 const objectId=mongo.ObjectId;
 const MongoClient = mongo.MongoClient;
-const dbURL = "mongodb://admin:joysa000@ds023634.mlab.com:23634/coder_dashboard"
+const dbURL = config.production.database
 var DBObj
 MongoClient.connect(dbURL, (err, db) => {
     if (err) {

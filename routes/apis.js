@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const request = require('request')
 const json_data = require('../public/commit_data.json')
 
@@ -59,6 +59,7 @@ router.get('/user', (req, res) => {
             if (err) {
                 return res.status(500).send('Users list could not be retrieved');
             }
+            
             let usersList = user_list.map((user) => {
                 let userObj = {
                     id: user._id,
