@@ -21,53 +21,75 @@
 
 </head>
 <body>
-	<div>
-		<%- include('./includes/header-includes'); %>
+<%- include('./includes/header-includes'); %>
+<div class="ui main container">
+	<div class="ui middle aligned center aligned grid">
+	  <div class="column">
+	    <h2 class="ui teal image header">
+	      <div class="content">
+	        Create your account
+	      </div>
+	    </h2>
+	    <form class="ui large form">
+	      <div class="ui stacked segment">
+	      <div class="field">
+	          <div class="ui left icon input">
+	            <i class="user icon"></i>
+	            <input type="text" name="name" placeholder="Your name" required="true">
+	          </div>
+	        </div>
+	        <div class="field">
+	          <div class="ui left icon input">
+	            <i class="user icon"></i>
+	            <input type="email" name="email" placeholder="E-mail address" required="true">
+	          </div>
+	        </div>
+	        <div class="field">
+	          <div class="ui left icon input">
+	            <i class="lock icon"></i>
+	            <input type="password" name="password" placeholder="Password" required="true">
+	          </div>
+	        </div>
+	        <button class="ui fluid large teal submit button" type="submit">Signup</button>
+	      </div>
+
+	      <div class="ui error message"></div>
+	      <div class="ui message">
+	       Existing User? <a href="/login">Login</a>
+	    </div>
+
+	    </form>
+	  </div>
 	</div>
-
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-    <h2 class="ui teal image header">
-      <div class="content">
-        Sign-up to your account
-      </div>
-    </h2>
-    <form class="ui large form">
-      <div class="ui stacked segment">
-      <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input type="text" name="name" placeholder="Your name">
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address">
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
-          </div>
-        </div>
-        <button class="ui fluid large teal submit button" type="submit">Sign-up</button>
-      </div>
-
-      <div class="ui error message"></div>
-      <div class="ui message">
-       Existing User? <a href="/login">Login</a>
-    </div>
-
-    </form>
-
-    
-  </div>
 </div>
-
-
-
-	
+	<%- include('./includes/js-includes'); %>
+	<script>
+		$(document).ready(function(){
+			//handle form submission
+			$('form').submit(function(e){
+				e.preventDefault();
+						var formData = {
+								'name': $('input[name=name]').val(),
+								'email': $('input[name=email]').val(),
+								'password': $('input[name=password]').val(),
+						};
+						console.log(formData)
+						//make ajax post to server
+								$.ajax({
+									type: 'POST',
+									url: '/apis/register',
+									data: formData,
+									dataType: 'json',
+									success: function(result){
+										window.location.href('/')
+									},
+									error: function(error){
+										console.log(error)
+										window.location.reload()
+									}
+								})
+			})
+		})
+	</script>
 </body>
 </html>
