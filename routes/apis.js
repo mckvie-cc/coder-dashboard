@@ -103,20 +103,30 @@ router.get('/user/:userId', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-    const email = req.body.email
+    const newUserInfo = {
+        name: req.body.name.trim(),
+        email: req.body.email.trim(),
+        password: req.body.password.trim()
+    }
+    console.log(newUserInfo)
+    if(!req.body.name || req.body.name === "" || !req.body.email || req.body.email === ""
+        || !req.body.password || req.body.email === ""){
+        return res.status(403).send("All fields not set properly")
+    }
+
     const db = req.db
     db.collection('users', function(err, collection) {
         if (err) {
-            return res.status(403).send('Unexpected Error')
+            return res.status(500).send('Unexpected Error')
         } else {
-            collection.find({ email: email }).toArray(function(err, items) {
+            collection.find({ email: newUserInfo.email }).toArray(function(err, items) {
                 if (err) {
                     return res.status(500).send('Unexpected Error')
                 } else if (items.length === 0) {
-                    collection.insert(req.body)
+                    collection.insert(newUserInfo)
                     return res.status(200).send("New user registered");
                 } else {
-                    return res.status(200).send("Already Registered");
+                    return res.status(403).send("Already Registered");
                 }
             })
         }
@@ -142,7 +152,7 @@ router.post('/login', (req, res) => {
                 if (password === items[0].password) {
                     return res.status(200).send('Passwords match')
                 }
-                return res.status(500).send('Passwords don\'nt match')
+                return res.status(403).send('Passwords don\'nt match')
             }
         })
     })
