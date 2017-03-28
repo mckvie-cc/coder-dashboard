@@ -70,12 +70,13 @@ router.get('/user', (req, res) => {
             }
 
             let usersList = user_list.map((user) => {
-                let userObj = {
+                const userObj = {
                     id: user._id,
                     name: user.name,
+                    email: user.email,
                     profile_url: user.profile_url,
-                    team_name: user.team_name,
-                    commit_count: commit_count
+                    sex: user.sex,
+                    team_name: user.team_name
                 }
                 return userObj
             })
@@ -166,6 +167,11 @@ router.post('/login', (req, res) => {
             } else {
                 if (password === items[0].password) {
                     req.session.isLoggedIn = true
+                    req.session.userObj = {
+                        name: items[0].name,
+                        email: items[0].email,
+                        id: items[0]._id
+                    }
                     return res.status(200).send('Passwords match')
                 }
                 return res.status(403).send('Passwords don\'nt match')
