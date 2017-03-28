@@ -1,18 +1,26 @@
 const express = require('express')
-const path = require('path')
 const app = express();
 const bodyParser = require('body-parser')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session);
+const path = require('path')
 const morgan = require('morgan');
 const config = require('./config/config')
 const port = process.env.PORT || 3000
 const mongo = require('mongodb');
-const objectId=mongo.ObjectId;
+const objectId = mongo.ObjectId;
 const MongoClient = mongo.MongoClient;
 const dbURL = config.production.database
 var DBObj
+app.use(session({
+    secret: 'randomsecret',
+    store: new MongoStore({ url: dbURL }),
+    saveUninitialized: false,
+    resave: false
+}));
 MongoClient.connect(dbURL, (err, db) => {
     if (err) {
-    	console.log('DB could not be connected\n',err.message)
+        console.log('DB could not be connected\n', err.message)
         return
     }
     DBObj = db

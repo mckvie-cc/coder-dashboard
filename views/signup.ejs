@@ -22,6 +22,7 @@
 </head>
 <body>
 <%- include('./includes/header-includes'); %>
+
 <div class="ui main container">
 	<div class="ui middle aligned center aligned grid">
 	  <div class="column">
@@ -30,6 +31,12 @@
 	        Create your account
 	      </div>
 	    </h2>
+		<div class="ui negative message hidden">
+		  <div class="header">
+		    Error message header here
+		  </div>
+		  <p>Full description
+		</p></div>
 	    <form class="ui large form">
 	      <div class="ui stacked segment">
 	      <div class="field">
@@ -64,30 +71,31 @@
 </div>
 	<%- include('./includes/js-includes'); %>
 	<script>
-		$(document).ready(function(){
+		$(document).ready(function() {
 			//handle form submission
-			$('form').submit(function(e){
+			$('form').submit(function(e) {
 				e.preventDefault();
-						var formData = {
-								'name': $('input[name=name]').val(),
-								'email': $('input[name=email]').val(),
-								'password': $('input[name=password]').val(),
-						};
-						console.log(formData)
-						//make ajax post to server
-								$.ajax({
-									type: 'POST',
-									url: '/apis/register',
-									data: formData,
-									dataType: 'json',
-									success: function(result){
-										window.location.href('/')
-									},
-									error: function(error){
-										console.log(error)
-										window.location.reload()
-									}
-								})
+				var formData = {
+					'name': $('input[name=name]').val(),
+					'email': $('input[name=email]').val(),
+					'password': $('input[name=password]').val(),
+				};
+				//make ajax post to server
+				$.post({
+					url: '/apis/register',
+					data: formData,
+					error: function(data) {
+						window.setTimeout(function(){
+							window.location.href = '/login'
+						}, 1000)
+						$('.negative > .header').html(data.responseText)
+						$('.negative > p').html('Redirecting you to login page in 1 sec.')
+						$('.message').removeClass('hidden')
+					},
+					success: function(data){
+						window.location.reload();
+					}
+				})
 			})
 		})
 	</script>

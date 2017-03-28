@@ -62,6 +62,9 @@
 	<%- include('./includes/js-includes'); %>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			function goHome(){
+				$(location).attr('href', '/home')
+			}
 			//handle form submission
 			$('form').submit(function(e){
 				e.preventDefault();
@@ -69,18 +72,15 @@
 		            'email': $('input[name=email]').val(),
 		            'password': $('input[name=password]').val(),
 		        };
-		        console.log(formData)
 		        //make ajax post to server
-                $.ajax({
-                	type: 'POST',
+                $.post({
                 	url: '/apis/login',
                 	data: formData,
-                	dataType: 'json',
-                	success: function(result){
-                		window.location.href('localhost:3000/signup')
+                	error: function(result){
+                		window.location.reload();
                 	},
-                	error: function(error){
-                		console.log(error)
+                	success: function(result){
+                		window.location.reload();
                 	}
                 })
 			})

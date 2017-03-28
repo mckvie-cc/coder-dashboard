@@ -8,34 +8,8 @@
 <body>
 <div>
 <%- include('./includes/header-includes'); %>
-  <div class="ui main text container">
-    <h1>Welcome to MCKVCC</h1>
-
-    <div class="list">
-		<div class="ui active centered inline loader"></div>
-<!-- 		<ul>
-			<li>
-				<a href="">Name of User</a>
-				<span>( Team Name )</span>
-				<strong>Commits Count</strong>
-			</li>
-		</ul> -->
-	</div>
-  </div>
-
-	<%- include('./includes/js-includes'); %>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$.get('/apis/user_commits', function(data){
-				let listHtml = '<ul>'
-				data.forEach(function(el){
-					listHtml += `<li><a href="/profile/${el.id}">${el.name}</a><span>(${el.team_name})</span> <strong>${el.commit_count}</strong></li>`
-				})
-				listHtml += '</ul>'
-				$('.list').html(listHtml)
-			})
-		});
-	</script>
-</div>
+	<div class="ui main text container">
+    	<h1>Welcome to MCKVCC</h1>
+    </div>
 </body>
 </html>
