@@ -116,7 +116,7 @@ router.get('/user/:userId', (req, res) => {
 router.post('/register', (req, res) => {
     const newUserInfo = {
         name: req.body.name.trim(),
-        email: req.body.email.trim(),
+        email: req.body.email.trim().toLowerCase(),
         password: req.body.password.trim()
     }
     if(!req.body.name || req.body.name === "" || !req.body.email || req.body.email === ""
@@ -151,8 +151,8 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
     const db = req.db
-    const email = req.body.email
-    const password = req.body.password
+    const email = req.body.email.trim().toLowerCase()
+    const password = req.body.password.trim()
 
     db.collection('users', (err, collection) => {
         if (err) {

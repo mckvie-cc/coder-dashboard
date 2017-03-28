@@ -80,6 +80,10 @@
 					'email': $('input[name=email]').val(),
 					'password': $('input[name=password]').val(),
 				};
+		        if(formData.name === "" || formData.email === "" || formData.password === ""){
+		        	//show error message here
+		        	return 
+		        }
 				//make ajax post to server
 				$.post({
 					url: '/apis/register',

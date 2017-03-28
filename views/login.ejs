@@ -69,9 +69,14 @@
 			$('form').submit(function(e){
 				e.preventDefault();
 		        var formData = {
-		            'email': $('input[name=email]').val(),
-		            'password': $('input[name=password]').val(),
+		            'email': $('input[name=email]').val().trim(),
+		            'password': $('input[name=password]').val().trim(),
 		        };
+
+		        if(formData.email === "" || formData.password === ""){
+		        	//show error message here
+		        	return 
+		        }
 		        //make ajax post to server
                 $.post({
                 	url: '/apis/login',
