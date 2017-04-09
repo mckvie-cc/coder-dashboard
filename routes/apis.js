@@ -94,7 +94,9 @@ router.get('/user/:userId', (req, res) => {
         if (err) {
             return res.status(500).send('Unexpected error')
         }
-        collection.find({ _id: ObjectId(userId).valueOf() }).toArray(function(err, result) {
+        collection.find({
+            _id: ObjectId(userId).valueOf()
+        }).toArray(function(err, result) {
             if (err) {
                 return res.status(500).send('Users list could not be retrieved');
             } else {
@@ -119,8 +121,7 @@ router.post('/register', (req, res) => {
         email: req.body.email.trim().toLowerCase(),
         password: req.body.password.trim()
     }
-    if(!req.body.name || req.body.name === "" || !req.body.email || req.body.email === ""
-        || !req.body.password || req.body.email === ""){
+    if (!req.body.name || req.body.name === "" || !req.body.email || req.body.email === "" || !req.body.password || req.body.email === "") {
         return res.status(403).send("All fields not set properly")
     }
 
@@ -129,15 +130,17 @@ router.post('/register', (req, res) => {
         if (err) {
             return res.status(500).send('Unexpected Error')
         } else {
-            collection.find({ email: newUserInfo.email }).toArray(function(err, items) {
+            collection.find({
+                email: newUserInfo.email
+            }).toArray(function(err, items) {
                 if (err) {
                     return res.status(500).send('Unexpected Error')
                 } else if (items.length === 0) {
                     collection.insert(newUserInfo)
                     sendMail({
-                      to: newUserInfo.email,
-                      subject: 'Welcome to 50 Days of Code',
-                      body: '<h3>50 Days of Code</h3><p>Thanks for registering with MCKVCC. <br> #codeOn</p>'
+                        to: newUserInfo.email,
+                        subject: 'Welcome to 50 Days of Code',
+                        body: '<h3>50 Days of Code</h3><p>Thanks for registering with MCKVCC. <br> #codeOn</p>'
                     })
                     req.session.isLoggedIn = true
                     return res.status(200).send("New user registered");
@@ -158,7 +161,9 @@ router.post('/login', (req, res) => {
         if (err) {
             return res.status(500).send('Unexpected error')
         }
-        collection.find({ email: email }).toArray(function(err, items) {
+        collection.find({
+            email: email
+        }).toArray(function(err, items) {
             if (err) {
                 return res.status(500).send('Unexpected Error')
             }
